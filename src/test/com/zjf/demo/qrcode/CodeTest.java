@@ -1,8 +1,10 @@
 package com.zjf.demo.qrcode;
 
+import junit.framework.TestCase;
+
 import static org.junit.Assert.*;
 
-public class CodeTest {
+public class CodeTest extends TestCase{
 
 
     public void test() {
@@ -19,15 +21,11 @@ public class CodeTest {
     /**
      *     QRcode 二维码解析测试
      */
-     String qrcodeAnalyze = QRCodeDecoderHandler.QRCodeAnalyze("E://qrcode.jpg");
+//     String qrcodeAnalyze = QRCodeDecoderHandler.QRCodeAnalyze("E://qrcode.jpg");
     /**
      * ZXingCode 二维码生成测试
      */
-     QRCodeEncoderHandler.zxingCodeCreate("http://blog.csdn.net/u014266877",
-             300,
-             300,
-             "E://zxingcode.jpg",
-             "jpg");
+//     QRCodeEncoderHandler.zxingCodeCreate("http://blog.csdn.net/u014266877",300,300,"E://zxingcode.jpg","jpg");
     /**
      * ZxingCode 二维码解析
      */

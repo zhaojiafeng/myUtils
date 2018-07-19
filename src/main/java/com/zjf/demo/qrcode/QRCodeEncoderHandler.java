@@ -1,5 +1,10 @@
 package com.zjf.demo.qrcode;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
 import com.swetake.util.Qrcode;
 
 import javax.imageio.ImageIO;
@@ -33,11 +38,9 @@ public class QRCodeEncoderHandler {
         try {
             //1、生成二维码
             BitMatrix encode = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height, his);
-
             //2、获取二维码宽高
             int codeWidth = encode.getWidth();
             int codeHeight = encode.getHeight();
-
             //3、将二维码放入缓冲流
             BufferedImage image = new BufferedImage(codeWidth, codeHeight, BufferedImage.TYPE_INT_RGB);
             for (int i = 0; i < codeWidth; i++) {
