@@ -1,17 +1,15 @@
 package com.zjf.demo.imageOperate;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
+import javax.imageio.*;
+import javax.imageio.stream.ImageInputStream;
 import javax.imageio.stream.ImageOutputStream;
 
 public class ImageUtils {
@@ -465,5 +463,45 @@ public class ImageUtils {
             return fileName.substring(lastIndex + 1);
         }
         return null;
+    }
+
+    /**
+     * 新增图片裁剪功能
+     * @param sourcePath    图片原路径
+     * @param x1            切割图片的左上角的坐标点
+     * @param y1            切割图片的左上角的坐标点
+     * @param width         切割图片宽度
+     * @param height        切割图片高度
+     * @param descpath      切割后图片的路径
+     */
+    private void cut(String sourcePath, int x1, int y1, int width, int height, String descpath) {
+        FileInputStream is = null;
+        ImageInputStream iis = null;
+        try {
+            is = new FileInputStream(sourcePath);
+            String fileSuffix = sourcePath.substring(sourcePath.lastIndexOf(".") + 1);
+            Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName(fileSuffix);
+            ImageReader reader = it.next();
+            iis = ImageIO.createImageInputStream(is);
+            reader.setInput(iis, true);
+            ImageReadParam param = reader.getDefaultReadParam();
+            Rectangle rect = new Rectangle(x1, y1, width, height);
+            param.setSourceRegion(rect);
+            BufferedImage bi = reader.read(0, param);
+            ImageIO.write(bi, fileSuffix, new File(descpath));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                    iis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                is = null;
+                iis = null;
+            }
+        }
     }
 }
