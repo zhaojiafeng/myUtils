@@ -3,7 +3,7 @@ package com.zjf.demo.qrcode;
 import com.github.binarywang.utils.qrcode.BufferedImageLuminanceSource;
 import com.google.zxing.*;
 import com.google.zxing.common.HybridBinarizer;
-
+import com.sun.imageio.plugins.common.ImageUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -26,7 +26,6 @@ public class QRCodeDecoderHandler {
             Map<DecodeHintType, Object> hints = new HashMap<>();
             hints.put(DecodeHintType.CHARACTER_SET, "UTF-8");
             Result result = new MultiFormatReader().decode(binaryBitmap, hints);
-
             return result.getText();
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,6 +41,10 @@ public class QRCodeDecoderHandler {
      * @param codePath    二维码路径
      * @return 解析结果
      */
+//import jp.sourceforge.qrcode.QRCodeDecoder;
+//import jp.sourceforge.qrcode.data.QRCodeImage;
+//import jp.sourceforge.qrcode.exception.DecodingFailedException;
+
 //    public static String QRCodeAnalyze(String codePath) {
 //        File imageFile = new File(codePath);
 //        BufferedImage bufImg = null;
@@ -62,5 +65,4 @@ public class QRCodeDecoderHandler {
 //        }
 //        return decodedData;
 //    }
-
 }

@@ -17,7 +17,6 @@ import java.util.Map;
 
 public class QRCodeEncoderHandler {
 
-
     //二维码颜色
     private static final int BLACK = 0xFF000000;
     //二维码颜色
@@ -63,7 +62,6 @@ public class QRCodeEncoderHandler {
             System.out.println("生成二维码图片失败");
         }
     }
-
 
 
     /**
@@ -136,8 +134,4 @@ public class QRCodeEncoderHandler {
             e.printStackTrace();
         }
     }
-
-
-
-
 }
