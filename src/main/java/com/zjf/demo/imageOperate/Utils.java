@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Utils {
+
     public static BufferedImage createImage(BufferedImage img, int width, int height, Color bgcolor) {
         int type = BufferedImage.TYPE_INT_ARGB;
         BufferedImage newImage = new BufferedImage(width, height, type);

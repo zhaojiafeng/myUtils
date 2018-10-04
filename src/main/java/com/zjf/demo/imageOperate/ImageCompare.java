@@ -13,6 +13,7 @@ public class ImageCompare {
      * 图像指纹的尺寸,将图像resize到指定的尺寸，来计算哈希数组
      */
     private static final int HASH_SIZE = 16;
+
     /**
      * 保存图像指纹的二值化矩阵
      */

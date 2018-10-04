@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,6 +14,7 @@ import javax.imageio.stream.ImageInputStream;
 import javax.imageio.stream.ImageOutputStream;
 
 public class ImageUtils {
+
     private File srcFile;
     private File destFile;
     private double angle;
@@ -203,33 +205,20 @@ public class ImageUtils {
                 this.height = (int) (srcImage.getHeight() * this.scale);
             }
             if (this.angle != 0) {
-                try {
-                    srcImage = this.rotateImage(srcImage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("rotate error!");
-                    return;
+                srcImage = this.rotateImage(srcImage);
+            }
+            BufferedImage destImage = this.resize(srcImage);
+            if (this.keepRatio) {
+                destImage = this.keepImageRatio(destImage, this.givenWidth, this.givenHeight);
+            }
+            if (this.watermarkArr != null) {
+                for (Watermark watermark : watermarkArr) {
+                    destImage = watermark.apply(destImage);
                 }
             }
-        } catch (IOException e1) {
-            e1.printStackTrace();
-            System.out.println("read image error!");
-            return;
-        }
-        BufferedImage destImage = this.resize(srcImage);
-        if (this.keepRatio) {
-            destImage = this.keepImageRatio(destImage, this.givenWidth, this.givenHeight);
-        }
-        if (this.watermarkArr != null) {
-            for (Watermark watermark : watermarkArr) {
-                destImage = watermark.apply(destImage);
-            }
-        }
-        try {
             this.makeImage(destImage);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("create image error!");
         }
     }
 
@@ -363,7 +352,7 @@ public class ImageUtils {
         return newImage;
     }
 
-    public void makeImage(BufferedImage newImage) throws IOException {
+    public void makeImage(BufferedImage newImage) {
         String fileExtension = getExtension(destFile);
         if (fileExtension.equalsIgnoreCase("jpg") || fileExtension.equalsIgnoreCase("jpeg")
                 || fileExtension.equalsIgnoreCase("bmp")) {
@@ -383,15 +372,18 @@ public class ImageUtils {
                 imgWriteParam.setCompressionQuality(this.quality);
             }
         }
-        ImageOutputStream outputStream = ImageIO.createImageOutputStream(destFile);
-        imgWriter.setOutput(outputStream);
-        IIOImage outputImage = new IIOImage(newImage, null, null);
-        imgWriter.write(null, outputImage, imgWriteParam);
-        imgWriter.dispose();
-        outputStream.close();
+
+        try (ImageOutputStream outputStream = ImageIO.createImageOutputStream(destFile)){
+            imgWriter.setOutput(outputStream);
+            IIOImage outputImage = new IIOImage(newImage, null, null);
+            imgWriter.write(null, outputImage, imgWriteParam);
+            imgWriter.dispose();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private BufferedImage rotateImage(BufferedImage img) throws IOException {
+    private BufferedImage rotateImage(BufferedImage img){
         int width = img.getWidth();
         int height = img.getHeight();
 
@@ -467,41 +459,30 @@ public class ImageUtils {
 
     /**
      * 新增图片裁剪功能
-     * @param sourcePath    图片原路径
-     * @param x1            切割图片的左上角的坐标点
-     * @param y1            切割图片的左上角的坐标点
-     * @param width         切割图片宽度
-     * @param height        切割图片高度
-     * @param descpath      切割后图片的路径
+     *
+     * @param sourcePath 图片原路径
+     * @param x1         切割图片的左上角的坐标点
+     * @param y1         切割图片的左上角的坐标点
+     * @param width      切割图片宽度
+     * @param height     切割图片高度
+     * @param descpath   切割后图片的路径
      */
-    private void cut(String sourcePath, int x1, int y1, int width, int height, String descpath) {
-        FileInputStream is = null;
-        ImageInputStream iis = null;
-        try {
-            is = new FileInputStream(sourcePath);
+    public static void cut(String sourcePath, int x1, int y1, int width, int height, String descpath) {
+        try (FileInputStream fileInputStream = new FileInputStream(sourcePath);
+             ImageInputStream imageInputStream = ImageIO.createImageInputStream(fileInputStream)) {
             String fileSuffix = sourcePath.substring(sourcePath.lastIndexOf(".") + 1);
             Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName(fileSuffix);
             ImageReader reader = it.next();
-            iis = ImageIO.createImageInputStream(is);
-            reader.setInput(iis, true);
+            reader.setInput(imageInputStream, true);
             ImageReadParam param = reader.getDefaultReadParam();
             Rectangle rect = new Rectangle(x1, y1, width, height);
             param.setSourceRegion(rect);
             BufferedImage bi = reader.read(0, param);
             ImageIO.write(bi, fileSuffix, new File(descpath));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                    iis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                is = null;
-                iis = null;
-            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
