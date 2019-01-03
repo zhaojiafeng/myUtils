@@ -1,4 +1,4 @@
-package com.zjf.demo.classUtils;
+package com.zjf.demo.commons.classUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +51,7 @@ public class ClassUtils<T> {
 
 
     /**
-     * 获取对象集合中的所欲属性值
+     * 获取对象集合中的所有属性值
      *
      * @param attributes 属性名的list集合
      * @param ts         对象的list集合
