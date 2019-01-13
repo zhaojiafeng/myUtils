@@ -15,11 +15,13 @@ public class MyConfigs implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/zxc/foo").setViewName("foo");
     }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new MyInterceptor())
                 .addPathPatterns("/asd/**");
     }
+
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Bean
     public FilterRegistrationBean filterRegist() {
@@ -29,6 +31,7 @@ public class MyConfigs implements WebMvcConfigurer {
         System.out.println("filter");
         return frBean;
     }
+
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Bean
     public ServletListenerRegistrationBean listenerRegist() {
