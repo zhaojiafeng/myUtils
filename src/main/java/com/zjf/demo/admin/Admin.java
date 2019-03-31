@@ -1,9 +1,14 @@
 package com.zjf.demo.admin;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name="admin")
 public class Admin {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     private String adminName;
     private String password;

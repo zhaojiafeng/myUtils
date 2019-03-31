@@ -1,7 +1,13 @@
 package com.zjf.demo.module;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="admin")
 public class Module {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     private String moduleName;
 
