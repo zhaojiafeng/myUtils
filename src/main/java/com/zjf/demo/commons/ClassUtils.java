@@ -1,4 +1,4 @@
-package com.zjf.demo.commons.classUtils;
+package com.zjf.demo.commons;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author zhaojiafeng
+ * 反射
+ */
 public class ClassUtils<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(ClassUtils.class);
