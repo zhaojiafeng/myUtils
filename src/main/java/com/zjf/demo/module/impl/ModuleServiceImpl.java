@@ -8,12 +8,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author zhaojiafeng
+ */
 @Service
 public class ModuleServiceImpl implements ModuleService {
 
-    @Autowired
-    private ModuleDao moduleDao;
+    private final ModuleDao moduleDao;
 
+    public ModuleServiceImpl(ModuleDao moduleDao) {
+        this.moduleDao = moduleDao;
+    }
+
+    @Override
     public List<Module> findAll() {
         return moduleDao.findAll();
     }

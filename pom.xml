@@ -38,6 +38,13 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+<!--        @Data注解所需依赖-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.10</version>
+        </dependency>
+
         <!--shiro的相关依赖-->
         <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
         <!--<dependency>-->

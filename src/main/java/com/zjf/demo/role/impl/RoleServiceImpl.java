@@ -8,12 +8,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author zhaojiafeng
+ */
 @Service
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
-    private RoleDao roleDao;
+    private final RoleDao roleDao;
 
+    public RoleServiceImpl(RoleDao roleDao) {
+        this.roleDao = roleDao;
+    }
+
+    @Override
     public List<Role> findAll() {
         return roleDao.findAll();
     }

@@ -1,7 +1,13 @@
 package com.zjf.demo.module;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+/**
+ * @author zhaojiafeng
+ */
+@Data
 @Entity
 @Table(name="admin")
 public class Module {
@@ -11,19 +17,4 @@ public class Module {
     private Integer id;
     private String moduleName;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getModuleName() {
-        return moduleName;
-    }
-
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
-    }
 }

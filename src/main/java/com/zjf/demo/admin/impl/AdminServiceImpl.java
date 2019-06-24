@@ -8,12 +8,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author zhaojiafeng
+ */
 @Service
 public class AdminServiceImpl implements AdminService {
 
-    @Autowired
-    private AdminDao adminDao;
+    private final AdminDao adminDao;
 
+    public AdminServiceImpl(AdminDao adminDao) {
+        this.adminDao = adminDao;
+    }
+
+    @Override
     public List<Admin> findAll() {
         return adminDao.findAll();
     }
