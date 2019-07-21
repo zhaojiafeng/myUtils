@@ -1,0 +1,1 @@
+package com.zjf.demo.mode.proxy.statistic;/** * @author zhaojiafeng */public class CarProxyImpl implements Car {    private Car car;    CarProxyImpl(final Car car) {        this.car = car;    }    @Override    public void buyCar() {        System.out.println("check money");        car.buyCar();        System.out.println("pay money");    }}

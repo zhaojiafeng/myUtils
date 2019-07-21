@@ -1,0 +1,1 @@
+package com.zjf.demo.mode.proxy.statistic;/** * @author zhaojiafeng */public class CarImpl implements Car {    @Override    public void buyCar() {        System.out.println("i want to buy car");    }}

@@ -1,0 +1,1 @@
+package com.zjf.demo.mode.proxy.statistic;public interface Car {    /**     * 买车     */    void buyCar();}

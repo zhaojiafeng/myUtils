@@ -1,0 +1,1 @@
+package com.zjf.demo.mode.proxy.statistic;/** * @author zhaojiafeng */public class StaticProxyTest {    public static void main(String[] args) {        Car car = new CarImpl();        car.buyCar();        CarProxyImpl carProxy = new CarProxyImpl(car);        carProxy.buyCar();    }}
