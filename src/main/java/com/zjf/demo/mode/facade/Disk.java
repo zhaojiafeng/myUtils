@@ -1,0 +1,1 @@
+package com.zjf.demo.mode.facade;import org.slf4j.Logger;import org.slf4j.LoggerFactory;/** * @author zhaojiafeng */class Disk {    private static final Logger LOGGER = LoggerFactory.getLogger(Disk.class);    void start() {        LOGGER.info("Disk is start...");    }    void shutDown() {        LOGGER.info("Disk is shutDown...");    }}

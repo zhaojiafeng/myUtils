@@ -1,0 +1,1 @@
+package com.zjf.demo.mode.facade;import org.slf4j.Logger;import org.slf4j.LoggerFactory;/** * @author zhaojiafeng */public class Client {    private static final Logger LOGGER = LoggerFactory.getLogger(Client.class);    public static void main(String[] args) {        Computer computer = new Computer();        computer.start();        computer.shutDown();    }}

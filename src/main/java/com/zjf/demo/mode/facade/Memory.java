@@ -1,0 +1,1 @@
+package com.zjf.demo.mode.facade;import org.slf4j.Logger;import org.slf4j.LoggerFactory;/** * @author zhaojiafeng */class Memory {    private static final Logger LOGGER = LoggerFactory.getLogger(Memory.class);    void start() {        LOGGER.info("Memory is start...");    }    void shutDown() {        LOGGER.info("Memory is shutDown...");    }}

@@ -1,0 +1,1 @@
+package com.zjf.demo.mode.adapter;/** * 适配器模式：将一个类的接口转换成客户希望的另一个接口。适配器模式让那些接口不兼容的类可以一起工作。 *      适配器模式的别名为包装器(Wrapper)模式，它既可以作为类结构型模式，也可以作为对象结构型模式。 *      在适配器模式定义中所提及的接口是指广义的接口，它可以表示一个方法或者方法的集合。 * @author zhaojiafeng */public class Adapter {}
