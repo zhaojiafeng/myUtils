@@ -3,18 +3,20 @@ package com.zjf.demo.admin;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.io.*;
 
 /**
  * @author zhaojiafeng
  */
 @Data
 @Entity
-@Table(name="admin")
-public class Admin {
+@Table(name = "admin")
+public class Admin implements Cloneable, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String adminName;
     private String password;
@@ -23,60 +25,86 @@ public class Admin {
     private String telephone;
     private String email;
 
+    /**
+     * 浅复制
+     * 原型模式
+     */
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    /**
+     * 深复制
+     * 要实现深复制，需要采用流的形式读入当前对象的二进制输入，再写出二进制数据对应的对象。
+     */
+    protected Object deepClone() {
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+            oos.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(bos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Admin() {
     }
 
-    public Admin(String adminName, Integer age) {
-        this.adminName = adminName;
-        this.age = age;
-    }
-
     public Admin(Integer id, String adminName, Integer age) {
-        this.id = id ;
-        this.adminName = adminName;
-        this.age = age;
-    }
-
-    public Admin(Integer id, String adminName, String password, Integer deleteFlag, String telephone, String email) {
         this.id = id;
         this.adminName = adminName;
-        this.password = password;
-        this.deleteFlag = deleteFlag;
-        this.telephone = telephone;
-        this.email = email;
+        this.age = age;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Admin temp = (Admin) obj;
-        return Objects.equals(id, temp.id) &&
-                Objects.equals(adminName, temp.adminName) &&
-                Objects.equals(password, temp.password) &&
-                Objects.equals(age, temp.age) &&
-                Objects.equals(deleteFlag, temp.deleteFlag) &&
-                Objects.equals(telephone, temp.telephone) &&
-                Objects.equals(email, temp.email) ;
+    public Admin(AdminBuilder builder) {
+        this.adminName = builder.adminName;
+        this.password = builder.password;
+        this.age = builder.age;
+        this.deleteFlag = builder.deleteFlag;
+        this.telephone = builder.telephone;
+        this.email = builder.email;
     }
 
-    @Override
-    public String toString() {
-        return "Admin{" +
-                "id=" + id +
-                ", adminName='" + adminName + '\'' +
-                ", password='" + password + '\'' +
-                ", age=" + age +
-                ", deleteFlag=" + deleteFlag +
-                ", telephone='" + telephone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    static class AdminBuilder {
+        String adminName;
+        String password;
+        Integer age;
+        Integer deleteFlag;
+        String telephone;
+        String email;
+
+        public void setAdminName(String adminName) {
+            this.adminName = adminName;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public void setAge(Integer age) {
+            this.age = age;
+        }
+
+        public void setDeleteFlag(Integer deleteFlag) {
+            this.deleteFlag = deleteFlag;
+        }
+
+        public void setTelephone(String telephone) {
+            this.telephone = telephone;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public Admin build() {
+            return new Admin(this);
+        }
     }
 }

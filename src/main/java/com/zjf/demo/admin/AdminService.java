@@ -7,7 +7,10 @@ import java.util.List;
  */
 public interface AdminService {
 
-    // 查询 用户info
+    /**
+     * 查询 用户info
+     * @return admin的list集合
+     */
     List<Admin> findAll();
 
 }

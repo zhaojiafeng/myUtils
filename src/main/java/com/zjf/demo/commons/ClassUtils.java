@@ -26,7 +26,7 @@ public class ClassUtils<T> {
      * @param object    属性对应值
      * @return 属性值
      */
-    public Object getValue(String attribute, Object object) {
+    private Object getValue(String attribute, Object object) {
         try {
             String getter = "get" + attribute.substring(0, 1).toUpperCase() + attribute.substring(1);
             Method method = object.getClass().getMethod(getter, new Class[]{});
@@ -45,7 +45,7 @@ public class ClassUtils<T> {
      * @param t          对象
      * @return 属性值的list集合
      */
-    public List getAllValues(List<String> attributes, T t) {
+    private List getAllValues(List<String> attributes, T t) {
         List values = new ArrayList();
         for (String attr : attributes) {
             values.add(getValue(attr, t));
