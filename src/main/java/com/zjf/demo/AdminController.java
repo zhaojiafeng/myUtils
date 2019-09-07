@@ -34,6 +34,13 @@ public class AdminController {
         this.moduleService = moduleService;
     }
 
+    private void test() {
+        Integer adminId = 1;
+        System.out.println(adminService.exists(adminId));
+        System.out.println(adminService.findByAdminId(adminId));
+        System.out.println(adminService.findByPage(adminId, adminId));
+    }
+
     @RequestMapping("/findAll")
     public List<Admin> findAll() {
         CompletableFuture<Integer> future1 = new CompletableFuture<>();

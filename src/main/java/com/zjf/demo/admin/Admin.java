@@ -62,7 +62,7 @@ public class Admin implements Cloneable, Serializable {
         this.age = age;
     }
 
-    public Admin(AdminBuilder builder) {
+    private Admin(AdminBuilder builder) {
         this.adminName = builder.adminName;
         this.password = builder.password;
         this.age = builder.age;
