@@ -54,6 +54,7 @@ public class Admin implements Cloneable, Serializable {
     }
 
     public Admin() {
+        this.adminName = "test";
     }
 
     public Admin(Integer id, String adminName, Integer age) {
@@ -71,6 +72,7 @@ public class Admin implements Cloneable, Serializable {
         this.email = builder.email;
     }
 
+    @Data
     static class AdminBuilder {
         String adminName;
         String password;
@@ -78,33 +80,5 @@ public class Admin implements Cloneable, Serializable {
         Integer deleteFlag;
         String telephone;
         String email;
-
-        public void setAdminName(String adminName) {
-            this.adminName = adminName;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public void setAge(Integer age) {
-            this.age = age;
-        }
-
-        public void setDeleteFlag(Integer deleteFlag) {
-            this.deleteFlag = deleteFlag;
-        }
-
-        public void setTelephone(String telephone) {
-            this.telephone = telephone;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public Admin build() {
-            return new Admin(this);
-        }
     }
 }

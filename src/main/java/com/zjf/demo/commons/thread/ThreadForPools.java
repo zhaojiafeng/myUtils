@@ -1,10 +1,13 @@
 package com.zjf.demo.commons.thread;
 
-public class ThreadForpools implements Runnable {
+/**
+ * @author zhaojiafeng
+ */
+public class ThreadForPools implements Runnable {
 
     private Integer index;
 
-    ThreadForpools(Integer index) {
+    ThreadForPools(Integer index) {
         this.index = index;
     }
 

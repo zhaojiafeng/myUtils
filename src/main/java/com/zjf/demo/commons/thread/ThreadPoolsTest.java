@@ -15,7 +15,7 @@ public class ThreadPoolsTest {
         ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
         System.out.println("******************newCachedThreadPool*****************");
         for (int i = 0; i < 5; i++) {
-            newCachedThreadPool.execute(new ThreadForpools(i));
+            newCachedThreadPool.execute(new ThreadForPools(i));
         }
         newCachedThreadPool.shutdown();
 
@@ -25,7 +25,7 @@ public class ThreadPoolsTest {
         ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(2);
         System.out.println("*****************newFixedThreadPool****************");
         for (int i = 0; i < 4; i++) {
-            newFixedThreadPool.execute(new ThreadForpools(i));
+            newFixedThreadPool.execute(new ThreadForPools(i));
         }
         newFixedThreadPool.shutdown();
 
@@ -35,7 +35,7 @@ public class ThreadPoolsTest {
         System.out.println("****************************newFixedThreadPool*******************************");
         for (int i = 0; i < 4; i++) {
             //延迟三秒执行
-            newScheduledThreadPool.schedule(new ThreadForpools(i), 3, TimeUnit.SECONDS);
+            newScheduledThreadPool.schedule(new ThreadForPools(i), 3, TimeUnit.SECONDS);
         }
         newScheduledThreadPool.shutdown();
 
@@ -45,7 +45,7 @@ public class ThreadPoolsTest {
         ExecutorService newSingleThreadExecutor = Executors.newSingleThreadExecutor();
         System.out.println("****************************newFixedThreadPool*******************************");
         for (int i = 0; i < 4; i++) {
-            newSingleThreadExecutor.execute(new ThreadForpools(i));
+            newSingleThreadExecutor.execute(new ThreadForPools(i));
         }
         newSingleThreadExecutor.shutdown();
 
@@ -53,7 +53,7 @@ public class ThreadPoolsTest {
 //        jdk8增加了newWorkStealingPool(int parall)，增加并行处理任务的线程池，不能保证处理的顺序。  有点问题
 //        ExecutorService newWorkStealingPool = Executors.newWorkStealingPool(2);
 //        for (int i = 0; i < 4; i++) {
-//            newWorkStealingPool.execute(new ThreadForpools(i));
+//            newWorkStealingPool.execute(new ThreadForPools(i));
 //        }
 //        newWorkStealingPool.shutdown();
     }
