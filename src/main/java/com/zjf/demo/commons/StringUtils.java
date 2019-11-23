@@ -1,0 +1,1 @@
+package com.zjf.demo.commons;import java.util.UUID;class StringUtils {    static String randomString() {        return UUID.randomUUID().toString().replace("-","");    }}
